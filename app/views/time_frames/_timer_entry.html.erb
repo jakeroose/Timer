@@ -18,7 +18,11 @@
       </div>
       <!-- else show this -->
       <div id='timer-<%= time_frame.id %>-description-text' class='timer-description-text' data-timer-id='<%= time_frame.id %>'>
-        <%= time_frame.description %>
+        <% if time_frame.description.blank? %>
+          Click here to set description
+        <% else %>
+          <%= time_frame.description  %>
+        <% end %>
       </div>
 
     </div>

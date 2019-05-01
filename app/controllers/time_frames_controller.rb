@@ -1,6 +1,6 @@
 class TimeFramesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_time_frame, except: %i[new create index]
+  before_action :set_time_frame, except: %i[new create index report]
 
   def new
     @time_frame = TimeFrame.new
@@ -25,7 +25,7 @@ class TimeFramesController < ApplicationController
   def update
     if @time_frame.update(time_frame_params)
       # redirect_to @time_frame
-      render partial: '/time_frames/timer_entry', locals: { time_frame: @time_frame } 
+      render partial: '/time_frames/timer_entry', locals: { time_frame: @time_frame }
     else
       render 'edit'
     end
@@ -46,6 +46,21 @@ class TimeFramesController < ApplicationController
     @time_frame&.stop_timer
 
     render json: @time_frame
+  end
+
+  def report
+    @report = TimeFramesReportCreator.new(current_user).time_spent_report
+    @total_times = @report[:data]
+    # @time_frames = current_user.time_frames
+    #
+    # @total_times = {}
+    # @time_frames.each do |t|
+    #   if @total_times[t.description]
+    #     @total_times[t.description] += t.time_elapsed
+    #   else
+    #     @total_times[t.description] = t.time_elapsed
+    #   end
+    # end
   end
 
 

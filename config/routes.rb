@@ -9,5 +9,9 @@ Rails.application.routes.draw do
       get :start
       get :stop
     end
+
+    collection do
+      get :report
+    end
   end
 end

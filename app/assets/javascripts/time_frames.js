@@ -39,7 +39,9 @@ function setupDescriptionObservers(timerId){
   $('#timer-' + timerId + '-description-text').on('click', (e) => {
     $(e.target).hide();
     const timerId = $(e.target).attr('data-timer-id');
+    const form = $('#timer-' + timerId + '-description-form');
     $('#timer-' + timerId + '-description-form').show();
+    form.find('input').focus();
   });
 
   // when user submits new description, render new timer
