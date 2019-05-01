@@ -16,4 +16,8 @@ class TimeFrame < ApplicationRecord
     self.active = false
     self.save
   end
+
+  def formatted_time_elapsed
+    Time.at(self.time_elapsed).utc.strftime("%H:%M:%S")
+  end
 end

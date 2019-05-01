@@ -1,6 +1,6 @@
-<h1>Previous TImers</h1>
+<h1>Previous Timers</h1>
 <ul>
   <% @time_frames.each do |t| %>
-    <li><%= t.time_elapsed %></li>
+    <%= render 'timer_entry', time_frame: t %>
   <% end %>
 </ul>

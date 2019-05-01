@@ -9,6 +9,7 @@ class TimeFramesController < ApplicationController
   def create
     @time_frame = TimeFrame.new(time_frame_params)
     @time_frame.user = current_user
+    @time_frame.time_elapsed ||= 0
 
     if @time_frame.save
       redirect_to @time_frame
