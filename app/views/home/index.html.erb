@@ -1,2 +1,11 @@
-<h1>Welcome to Stoppr!</h1>
-<p>Please <%= link_to "Sign Up", new_user_registration_path %> to start tracking your life!</p>
+<% if current_user %>
+  <h1>Previous TImers</h1>
+  <ul>
+    <% @time_frames.each do |t| %>
+      <li><%= t.time_elapsed %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <h1>Welcome to Stoppr!</h1>
+  <p>Please <%= link_to "Sign Up", new_user_registration_path %> to start tracking your life!</p>
+<% end %>

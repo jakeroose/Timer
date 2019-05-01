@@ -1,0 +1,14 @@
+<h3>Active Timer</h3>
+<div class="active-timer-container" data-timer-<%= time_frame.id %>='true'>
+  <div class="row">
+    <div class="col-8">
+      <div id='timer-<%= time_frame.id %>-time-elapsed'>
+        <%= time_frame.time_elapsed %>
+      </div>
+    </div>
+    <div id='timer-controls-<%= time_frame.id %>'class="col-4 timer-controls" data-timer-active=<%= time_frame.active %>>
+      <%= link_to "Stop", stop_time_frame_path(time_frame), remote: true, class: 'btn btn-danger stop-timer-btn', hidden: !time_frame.active %>
+      <%= link_to "Start", start_time_frame_path(time_frame), remote: true, class: 'btn btn-success start-timer-btn', hidden: time_frame.active %>
+    </div>
+  </div>
+</div>
