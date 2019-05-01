@@ -24,7 +24,8 @@ class TimeFramesController < ApplicationController
 
   def update
     if @time_frame.update(time_frame_params)
-      redirect_to @time_frame
+      # redirect_to @time_frame
+      render partial: '/time_frames/timer_entry', locals: { time_frame: @time_frame } 
     else
       render 'edit'
     end
@@ -55,6 +56,6 @@ class TimeFramesController < ApplicationController
   end
 
   def time_frame_params
-    params.require(:time_frame).permit(:time_elapsed, :active)
+    params.require(:time_frame).permit(:time_elapsed, :active, :description)
   end
 end

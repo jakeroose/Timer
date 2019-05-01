@@ -1,22 +1,3 @@
 <h1>TimeFrames#new</h1>
 <p>Find me in app/views/time_frames/new.html.erb</p>
-<%= form_for @time_frame do |f| %>
-  <ul>
-    <% @time_frame.errors.full_messages.each do |e| %>
-      <li><%= e %></li>
-    <% end %>
-  </ul>
-  <div class='field form-group'>
-    <%= f.label :time_elapsed %><br>
-    <%= f.text_field :time_elapsed %>
-  </div>
-
-  <div class="field form-group">
-    <%= f.check_box :active %>
-    <%= f.label :active %>
-  </div>
-
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+<%= render 'edit_form', time_frame: @time_frame %>

@@ -1,4 +1,3 @@
-<h3>Active Timer</h3>
 <div id='timer-container-<%= time_frame.id %>' class="timer-container"
   data-timer-<%= time_frame.id %>='true'
   data-start-time='<%= time_frame.start_time.to_i %>'
@@ -6,12 +5,29 @@
   data-timer-active=<%= time_frame.active %>
   data-timer-id=<%= time_frame.id %>>
   <div class="row">
-    <div class="col-8">
+    <div class="col-6">
+
+      <!-- onClick show this form -->
+      <div id='timer-<%= time_frame.id %>-description-form' class='timer-descrption-form' style='display: none;'>
+        <%= form_for time_frame, remote: true do |f| %>
+        <div class='field form-group'>
+          <%= f.text_field :description %>
+        </div>
+        <%= f.submit "Submit", style: 'display: none;' %>
+        <% end %>
+      </div>
+      <!-- else show this -->
+      <div id='timer-<%= time_frame.id %>-description-text' class='timer-description-text' data-timer-id='<%= time_frame.id %>'>
+        <%= time_frame.description %>
+      </div>
+
+    </div>
+    <div class="col-3">
       <div id='timer-<%= time_frame.id %>-time-elapsed'>
         <%= time_frame.formatted_time_elapsed %>
       </div>
     </div>
-    <div id='timer-controls-<%= time_frame.id %>'class="col-4 timer-controls">
+    <div id='timer-controls-<%= time_frame.id %>'class="col-3 timer-controls">
       <%= link_to "Stop", stop_time_frame_path(time_frame), remote: true, class: 'btn btn-danger stop-timer-btn', hidden: !time_frame.active %>
       <%= link_to "Start", start_time_frame_path(time_frame), remote: true, class: 'btn btn-success start-timer-btn', hidden: time_frame.active %>
     </div>

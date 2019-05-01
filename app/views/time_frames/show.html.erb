@@ -2,25 +2,5 @@
   Time Elapsed: <%= @time_frame.time_elapsed %>
 </h3>
 
-<%= form_for @time_frame do |f| %>
-  <ul>
-    <% @time_frame.errors.full_messages.each do |e| %>
-      <li><%= e %></li>
-    <% end %>
-  </ul>
-  <div class='field form-group'>
-    <%= f.label :time_elapsed %><br>
-    <%= f.text_field :time_elapsed %>
-  </div>
-
-  <div class="field form-group">
-    <%= f.check_box :active %>
-    <%= f.label :active %>
-  </div>
-
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-
+<%= render 'edit_form', time_frame: @time_frame %>
 <%= render 'timer_entry', time_frame: @time_frame %>
