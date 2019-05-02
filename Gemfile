@@ -6,6 +6,7 @@ ruby '2.5.1'
 # custom gems
 gem 'devise'
 gem 'bootstrap'
+gem 'popper'
 gem 'jquery-rails'
 
 

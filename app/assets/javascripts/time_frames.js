@@ -1,6 +1,5 @@
-// BUG: When starting timers or loading page with an active timer, there is a 1 sec delay
-//  for the time elapsed to update.
-$(document).ready( () => {
+$(document).on('turbolinks:load', () => {
+  console.log('Ready!');
   initializeAllTimers();
 });
 
@@ -14,7 +13,8 @@ function initializeAllTimers(){
 // This sets up all of the observers we need for a timer
 function initializeTimer(timerId){
   setupTimerButtonObservers(timerId);
-  // Activate the timer so that it updates every second when active
+  updateElapsedTime(timerId);
+  // Start the timer so that it updates every second when active
   window.setInterval(() => updateElapsedTime(timerId), 1000);
   setupDescriptionObservers(timerId);
 }
