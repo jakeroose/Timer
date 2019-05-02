@@ -50,17 +50,7 @@ class TimeFramesController < ApplicationController
 
   def report
     @report = TimeFramesReportCreator.new(current_user).time_spent_report
-    @total_times = @report[:data]
-    # @time_frames = current_user.time_frames
-    #
-    # @total_times = {}
-    # @time_frames.each do |t|
-    #   if @total_times[t.description]
-    #     @total_times[t.description] += t.time_elapsed
-    #   else
-    #     @total_times[t.description] = t.time_elapsed
-    #   end
-    # end
+    @total_times = @report[:total_times]
   end
 
 

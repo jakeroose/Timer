@@ -14,6 +14,7 @@
 //= require popper
 //= require bootstrap
 //= require jquery_ujs
+//= require Chart.bundle.min
 //= require activestorage
 //= require turbolinks
 //= require_tree .

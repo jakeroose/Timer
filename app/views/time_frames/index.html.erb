@@ -1,8 +1,8 @@
 <h1>Previous Timers</h1>
 <ul class='list-group'>
   <% @time_frames.each do |t| %>
-  <li id='timer-list-item-<%= t.id %>' class='list-group-item'>
-    <%= render 'timer_entry', time_frame: t %>
-  </li>
+    <li id='timer-list-item-<%= t.id %>' class='list-group-item'>
+      <%= render 'timer_entry', time_frame: t %>
+    </li>
   <% end %>
 </ul>

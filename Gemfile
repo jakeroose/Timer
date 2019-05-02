@@ -8,6 +8,7 @@ gem 'devise'
 gem 'bootstrap'
 gem 'popper'
 gem 'jquery-rails'
+gem 'chartjs-ror'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

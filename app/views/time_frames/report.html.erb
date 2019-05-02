@@ -1,8 +1,19 @@
-<ul>
-  <% @total_times.each do |tt| %>
-    <li>
-      <%= tt[0] %>: <%= tt[1] %> seconds, <%= ((tt[1] / @report[:total_time].to_f) * 100).round(2) %>%
-    </li>
-  <% end %>
-
-</ul>
+<div class="row">
+  <div class="col-12">
+    <h1>Summary Report</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col col-md-4 col-sm-12">
+    <ul>
+      <% @total_times.each do |tt| %>
+      <li>
+        <%= tt[0] %>: <%= tt[1] %> seconds
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col col-md-auto">
+      <%= pie_chart @report[:data],  @report[:options] %>
+  </div>
+</div>
