@@ -5,10 +5,9 @@
   data-timer-active=<%= time_frame.active %>
   data-timer-id=<%= time_frame.id %>>
   <div class="row">
-    <div class="col-6">
-
-      <!-- onClick show this form -->
-      <div id='timer-<%= time_frame.id %>-description-form' class='timer-descrption-form' style='display: none;'>
+    <div class="col-4">
+      <!-- Description: onClick show this form -->
+      <div id='timer-<%= time_frame.id %>-description-form' class='timer-description-form' style='display: none;'>
         <%= form_for time_frame, remote: true do |f| %>
         <div class='field form-group'>
           <%= f.text_field :description, class: 'form-control' %>
@@ -29,9 +28,20 @@
           </span>
         <% end %>
       </div>
-
     </div>
-    <div class="col-3">
+
+    <div class="col-5 text-right">
+      <!-- Time Elapsed: onClick show this form -->
+      <div id='timer-<%= time_frame.id %>-time-elapsed-form' class='timer-time-elapsed-form' style='display: none;'>
+        <%= form_for time_frame, remote: true do |f| %>
+        <div class='field form-group'>
+          <%= f.text_field :time_elapsed, class: 'form-control time-frames-time-elapsed text-right' %>
+        </div>
+        <%= f.submit "Submit", style: 'display: none;' %>
+        <% end %>
+      </div>
+
+      <!-- else show this -->
       <div id='timer-<%= time_frame.id %>-time-elapsed'>
         <%= time_frame.formatted_time_elapsed %>
       </div>

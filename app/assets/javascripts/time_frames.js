@@ -1,7 +1,6 @@
 $(document).on('turbolinks:load', () => {
-  console.log('Ready!');
   initializeAllTimers();
-  $('.time-frames-time-elapsed').val('00:00:00');
+  $('.new_time_frame .time-frames-time-elapsed').val('00:00:00');
 });
 
 // Called on page load to set up all observers for the timers
@@ -17,7 +16,8 @@ function initializeTimer(timerId){
   updateElapsedTime(timerId);
   // Start the timer so that it updates every second when active
   window.setInterval(() => updateElapsedTime(timerId), 1000);
-  setupDescriptionObservers(timerId);
+  setupDescriptionObserver(timerId);
+  setupTimeElapsedObserver(timerId);
 }
 
 // Visually updates time elapsed for a timer
@@ -35,7 +35,7 @@ function updateElapsedTime(timerId){
 }
 
 // Handles showing the form for a timer description
-function setupDescriptionObservers(timerId){
+function setupDescriptionObserver(timerId){
   // Show description form when user clicks on timer description
   $('#timer-' + timerId + '-description-text').on('click', (e) => {
     $(e.target).hide();
@@ -48,10 +48,37 @@ function setupDescriptionObservers(timerId){
       form.hide();
       $(e.target).show();
     });
-  });
 
-  // when user submits new description, render new timer
-  $('#edit_time_frame_' + timerId).on('ajax:success', (event, data) => {
+    replaceTimerOnSuccess(timerId, 'timer-description-form');
+  });
+}
+
+// Handles showing the form for a timer time_elapsed
+function setupTimeElapsedObserver(timerId){
+  // Show description form when user clicks on timer description
+  $('#timer-' + timerId + '-time-elapsed').on('click', (e) => {
+    if(timerActive(timerId) == 'true') return;
+    $(e.target).hide();
+    const form = $('#timer-' + timerId + '-time-elapsed-form');
+    form.show();
+
+    // replace input with formatted time
+    const input = form.find('.time-frames-time-elapsed');
+    input.val($(e.target).text().trim());
+    input.focus();
+
+    // When user clicks somewhere else hide the form and show description again
+    form.on('focusout', () => {
+      form.hide();
+      $(e.target).show();
+    });
+    replaceTimerOnSuccess(timerId,'timer-time-elapsed-form');
+  });
+}
+
+// when user updates timer, render the updated timer
+function replaceTimerOnSuccess(timerId, formClass){
+  $('.' + formClass + ' #edit_time_frame_' + timerId).on('ajax:success', (event, data) => {
     $('#timer-list-item-' + timerId).html(data);
 
     // Re initialize observers for this timer

@@ -1,9 +1,5 @@
-<div class="row py-1">
-  <div class="col">
-    <h1 class='timers-title'>My Timers</h1>
-  </div>
-</div>
-<div class="d-flex flex-lg-row-reverse flex-sm-row flex-wrap">
+
+<div class="d-flex flex-lg-row-reverse flex-sm-row flex-wrap mt-4">
   <div class="flex-col pb-4">
       <%= render 'edit_form', time_frame: TimeFrame.new(user: current_user) %>
   </div>
