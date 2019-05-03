@@ -1,8 +1,25 @@
-<h1>Previous Timers</h1>
-<ul class='list-group'>
-  <% @time_frames.each do |t| %>
-    <li id='timer-list-item-<%= t.id %>' class='list-group-item'>
-      <%= render 'timer_entry', time_frame: t %>
-    </li>
-  <% end %>
-</ul>
+<div class="row py-1">
+  <div class="col">
+    <h1 class='timers-title'>My Timers</h1>
+  </div>
+</div>
+<div class="d-flex flex-lg-row-reverse flex-sm-row flex-wrap">
+  <div class="flex-col pb-4">
+      <%= render 'edit_form', time_frame: TimeFrame.new(user: current_user) %>
+  </div>
+  <div class="flex-fill">
+    <ul class='list-group'>
+      <% if @time_frames.empty? %>
+      <div class="font-italic">
+        You don't have any timers yet!
+      </div>
+      <% else %>
+        <% @time_frames.each do |t| %>
+          <li id='timer-list-item-<%= t.id %>' class='list-group-item'>
+            <%= render 'timer_entry', time_frame: t %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>

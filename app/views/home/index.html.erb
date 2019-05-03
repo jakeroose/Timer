@@ -1,11 +1,31 @@
-<% if current_user %>
-  <h1>Previous TImers</h1>
-  <ul>
-    <% @time_frames.each do |t| %>
-      <li><%= t.time_elapsed %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <h1>Welcome to Stoppr!</h1>
-  <p>Please <%= link_to "Sign Up", new_user_registration_path %> to start tracking your life!</p>
-<% end %>
+<div id='home-page-container' class="">
+
+<div class="home-cta">
+  <h1>Stop wasting time.</h1>
+  <h3>Keep track of it instead!</h3>
+  <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-success' %>
+</div>
+
+<div class="">
+  <div id='cta-divider' class="">
+    <p>
+      With Stoppr, you can can easily keep track of how you are spending your time throughout the day.
+    </p>
+  </div>
+</div>
+<div class="">
+  <div class="">
+    <h3>Great at multitasking?</h3>
+    <p>With our cutting-edge technology, you can keep multiple timers running at once!</p>
+  </div>
+  <div class="">
+    <h3>On the go?</h3>
+    <p>Stoppr can be accessed anywhere from any device!</p>
+  </div>
+  <div class="">
+    <h3>Can't remember what you did last week?</h3>
+    <p>Run a custom report to see how much time you spent on different activities!</p>
+  </div>
+</div>
+
+</div>

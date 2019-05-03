@@ -7,7 +7,7 @@ class TimeFramesReportCreator
 
   # Returns data and options formatted to work with Chart.js' pie chart settings
   def time_spent_report
-    return { data: format_data, options: options, total_times: @total_times }
+    return { data: format_data, options: options, total_times: @total_times, total_time: @total_time }
   end
 
   private
@@ -27,6 +27,7 @@ class TimeFramesReportCreator
   def calculate_total_times
     # format: { [ description, total_seconds ] ... }
     @total_times = {}
+    @total_time = 0
     @time_frames.each do |t|
       t.description = t.description.blank? ? "(No Description)" : t.description
       if @total_times[t.description]
@@ -34,6 +35,7 @@ class TimeFramesReportCreator
       else
         @total_times[t.description] = t.time_elapsed
       end
+      @total_time += t.time_elapsed
     end
   end
 
@@ -53,12 +55,16 @@ class TimeFramesReportCreator
         callbacks: {
           label: label_function
         }
+      },
+      legend: {
+        position: 'bottom'
       }
     }
   end
 
   # Colors used for the sections of the chart
+  # https://learnui.design/tools/data-color-picker.html
   def colors
-    ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"]
+    %w[#008ae0 #00a4f4 #00bdf3 #00d2de #00e4b8 #00f387 #95fd50 #f2ff00]
   end
 end

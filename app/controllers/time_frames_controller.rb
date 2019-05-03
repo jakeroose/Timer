@@ -9,25 +9,24 @@ class TimeFramesController < ApplicationController
   def create
     @time_frame = TimeFrame.new(time_frame_params)
     @time_frame.user = current_user
-    @time_frame.time_elapsed ||= 0
+    @time_frame.time_elapsed = convert_time(time_frame_params[:time_elapsed])
 
-    if @time_frame.save
-      redirect_to @time_frame
-    else
-      render 'new'
-    end
+     @time_frame.save
+
+    redirect_to time_frames_path
   end
 
   def index
-    @time_frames = TimeFrame.where(user_id: current_user.id)
+    @time_frames = TimeFrame.where(user_id: current_user.id).order(id: :desc)
   end
 
   def update
+    params[:time_frame][:time_elapsed] = convert_time(time_frame_params[:time_elapsed])
+
     if @time_frame.update(time_frame_params)
-      # redirect_to @time_frame
       render partial: '/time_frames/timer_entry', locals: { time_frame: @time_frame }
     else
-      render 'edit'
+      render json: @time_frame.errors
     end
   end
 
@@ -55,6 +54,26 @@ class TimeFramesController < ApplicationController
 
 
   private
+
+  # Converts time from hh:mm:ss to seconds
+  # Need stronger validation - user can input characters and it will
+  # just set the time to 0. Probably want to prevent form from submitting
+  # and let the user know that they're being silly.
+  def convert_time(time)
+    t = time.to_s.match('\d{1,2}:\d{1,2}:\d{1,2}')
+    if t.nil?
+      puts "time = #{time}"
+      time ||= 0
+    else
+      t = t[0].split(':')
+      total = t[0].to_i * 3600
+      total += t[1].to_i * 60
+      total += t[2].to_i
+      puts "time = #{total}"
+
+      t = total
+    end
+  end
 
   def set_time_frame
     @time_frame = TimeFrame.find(params[:id])

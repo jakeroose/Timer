@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @time_frames = TimeFrame.where(user_id: current_user.id)
+    redirect_to time_frames_path if current_user 
   end
 end

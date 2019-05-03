@@ -1,6 +1,7 @@
 $(document).on('turbolinks:load', () => {
   console.log('Ready!');
   initializeAllTimers();
+  $('.time-frames-time-elapsed').val('00:00:00');
 });
 
 // Called on page load to set up all observers for the timers
@@ -38,10 +39,15 @@ function setupDescriptionObservers(timerId){
   // Show description form when user clicks on timer description
   $('#timer-' + timerId + '-description-text').on('click', (e) => {
     $(e.target).hide();
-    const timerId = $(e.target).attr('data-timer-id');
     const form = $('#timer-' + timerId + '-description-form');
-    $('#timer-' + timerId + '-description-form').show();
+    form.show();
     form.find('input').focus();
+
+    // When user clicks somewhere else hide the form and show description again
+    form.on('focusout', () => {
+      form.hide();
+      $(e.target).show();
+    });
   });
 
   // when user submits new description, render new timer

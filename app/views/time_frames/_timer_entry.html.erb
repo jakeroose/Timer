@@ -11,17 +11,22 @@
       <div id='timer-<%= time_frame.id %>-description-form' class='timer-descrption-form' style='display: none;'>
         <%= form_for time_frame, remote: true do |f| %>
         <div class='field form-group'>
-          <%= f.text_field :description %>
+          <%= f.text_field :description, class: 'form-control' %>
         </div>
         <%= f.submit "Submit", style: 'display: none;' %>
         <% end %>
       </div>
+
       <!-- else show this -->
-      <div id='timer-<%= time_frame.id %>-description-text' class='timer-description-text' data-timer-id='<%= time_frame.id %>'>
+      <div  class='timer-description-text'>
         <% if time_frame.description.blank? %>
-          Click here to set description
+          <span id='timer-<%= time_frame.id %>-description-text' class='font-italic text-secondary'>
+            (No Description)
+          </span>
         <% else %>
-          <%= time_frame.description  %>
+          <span id='timer-<%= time_frame.id %>-description-text'>
+            <%= time_frame.description  %>
+          </span>
         <% end %>
       </div>
 
