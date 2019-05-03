@@ -27,3 +27,14 @@ Run database migration
 Finally, start the server
 
 - `rails s`
+
+### Generating Test Data
+
+ Run the following command to quickly generate a user and with randomized timers over the past week
+ 
+ - `rails db:seed`
+ 
+Log in as that user to see the timers
+
+- email: *generateduser@example.com*
+- password: *password*
