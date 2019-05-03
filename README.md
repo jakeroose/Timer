@@ -1,24 +1,29 @@
-# README
+# About this project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a web app that allows users to create timers, label them, and generate reports from them to see how they are spending their time.
 
-Things you may want to cover:
+#### To run this application:
 
-* Ruby version
+Make sure to have Ruby installed
 
-* System dependencies
+- Project built using **Ruby 2.5.1**
 
-* Configuration
+Make sure to have Rails and MySql installed ([installation instructions](https://gorails.com/setup/ubuntu/16.04))
 
-* Database creation
+- Project built using **Rails 5.2.3**
 
-* Database initialization
+Install bundler gem
 
-* How to run the test suite
+- `gem install bundler`
 
-* Services (job queues, cache servers, search engines, etc.)
+Bundle & install required application gems inside the project directory
 
-* Deployment instructions
+- `bundle install`
 
-* ...
+Run database migration
+
+- `rails db:migrate`
+
+Finally, start the server
+
+- `rails s`
