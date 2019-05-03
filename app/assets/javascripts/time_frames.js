@@ -6,7 +6,8 @@ $(document).on('turbolinks:load', () => {
 // Called on page load to set up all observers for the timers
 function initializeAllTimers(){
   $('.timer-container').each((i, el) => {
-    initializeTimer($(el).attr('data-timer-id'));
+    const timerId = $(el).attr('data-timer-id');
+    initializeTimer(timerId);
   });
 }
 
