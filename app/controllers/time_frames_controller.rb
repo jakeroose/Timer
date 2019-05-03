@@ -21,7 +21,9 @@ class TimeFramesController < ApplicationController
   end
 
   def update
-    params[:time_frame][:time_elapsed] = convert_time(time_frame_params[:time_elapsed])
+    # Only used if we update time, which we currently don't do anywhere
+    time = time_frame_params[:time_elapsed]
+    params[:time_frame][:time_elapsed] = convert_time(time) unless time.nil?
 
     if @time_frame.update(time_frame_params)
       render partial: '/time_frames/timer_entry', locals: { time_frame: @time_frame }
@@ -62,16 +64,12 @@ class TimeFramesController < ApplicationController
   def convert_time(time)
     t = time.to_s.match('\d{1,2}:\d{1,2}:\d{1,2}')
     if t.nil?
-      puts "time = #{time}"
       time ||= 0
     else
       t = t[0].split(':')
       total = t[0].to_i * 3600
       total += t[1].to_i * 60
       total += t[2].to_i
-      puts "time = #{total}"
-
-      t = total
     end
   end
 
