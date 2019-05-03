@@ -5,25 +5,25 @@
 </div>
 <div class="row reports-search-bar">
   <div class="col-12">
-    <form class="form-inline ">
+    <%= form_tag(report_time_frames_path, method: :get, class: 'form-inline') do %>
       <div class="input-group mr-2 my-1 my-md-0">
-        <label for='startDate' class='mr-1'>Start Date</label>
-        <input type="date" id='startDate' class='form-control'>
+        <label for='start_date' class='mr-1'>Start Date</label>
+        <%= date_field_tag :start_date, params[:start_date], class: 'form-control' %>
       </div>
-
       <div class="input-group mr-2 my-1 my-md-0">
-        <label for='endDate' class='mr-1'>End Date</label>
-        <input type="date" id='endDate' class='form-control'>
+        <label for='end_date' class='mr-1'>End Date</label>
+        <%= date_field_tag :end_date, params[:end_date], class: 'form-control'  %>
       </div>
-
       <div class="input-group my-1 my-md-0">
-        <input type="search" name="search" class='form-control mr-2' placeholder="Description">
-        <button class="btn btn-outline-success" type="submit">Apply</button>
+        <%= text_field_tag :description, params[:description], class: 'form-control mr-2', placeholder: 'Description' %>
       </div>
-
-    </form>
+      <div class="input-group my-1 my-md-0">
+        <%= submit_tag 'Apply', class: "btn btn-outline-success", name: nil %>
+      </div>
+    <% end %>
   </div>
 </div>
+
 <div class="row">
   <div class="col">
     <h3>Total: <%= format_seconds(@report[:total_time]) %></h3>

@@ -2,10 +2,6 @@ class TimeFramesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_time_frame, except: %i[new create index report]
 
-  def new
-    @time_frame = TimeFrame.new
-  end
-
   def create
     @time_frame = TimeFrame.new(time_frame_params)
     @time_frame.user = current_user
@@ -50,7 +46,7 @@ class TimeFramesController < ApplicationController
   end
 
   def report
-    @report = TimeFramesReportCreator.new(current_user).time_spent_report
+    @report = TimeFramesReportCreator.new(current_user, params).time_spent_report
     @total_times = @report[:total_times]
   end
 
@@ -74,7 +70,11 @@ class TimeFramesController < ApplicationController
   end
 
   def set_time_frame
-    @time_frame = TimeFrame.find(params[:id])
+    begin
+      @time_frame = TimeFrame.find(params[:id])
+    rescue
+      redirect_to root_path
+    end
   end
 
   def time_frame_params

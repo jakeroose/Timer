@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/index'
 
-  resources :time_frames do
+  resources :time_frames, except: [:new] do
     member do
       get :start
       get :stop

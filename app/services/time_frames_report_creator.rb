@@ -1,8 +1,8 @@
 class TimeFramesReportCreator
 
-  def initialize(user)
+  def initialize(user, params)
     @user = user
-    @time_frames = @user.time_frames
+    handle_params(params)
   end
 
   # Returns data and options formatted to work with Chart.js' pie chart settings
@@ -22,6 +22,23 @@ class TimeFramesReportCreator
         }
       ]
     }
+  end
+
+  # Handles search params
+  # NOTE: NOT PRODUCTION READY - need to sanitize query params
+  def handle_params(params)
+    queries = []
+    queries.push("time_frames.description LIKE '#{params[:description]}'") if params[:description].present?
+    queries.push("time_frames.created_at >= '#{params[:start_date]}'") if params[:start_date].present?
+    # check if date falls any time on the day of end date
+    queries.push("time_frames.created_at <= '#{params[:end_date].to_datetime.end_of_day}'") if params[:end_date].present?
+
+    if queries.empty?
+      @time_frames = @user.time_frames
+    else
+      @time_frames = @user.time_frames.where(queries.join(' AND '))
+    end
+
   end
 
   def calculate_total_times
