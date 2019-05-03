@@ -16,7 +16,7 @@ Install bundler gem
 
 - `gem install bundler`
 
-Bundle & install required application gems inside the *timer* directory
+Bundle & install required application gems inside the project directory
 
 - `bundle install`
 
