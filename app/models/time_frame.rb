@@ -1,5 +1,6 @@
 class TimeFrame < ApplicationRecord
   belongs_to :user
+  before_save :check_nil_values
 
   def start_timer
     self.active = true
@@ -19,5 +20,12 @@ class TimeFrame < ApplicationRecord
 
   def formatted_time_elapsed
     Time.at(self.time_elapsed || 0).utc.strftime("%H:%M:%S")
+  end
+
+private
+
+  def check_nil_values
+    self.active = false if self.active.nil?
+    self.time_elapsed = 0 if self.time_elapsed.nil?
   end
 end
